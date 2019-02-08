@@ -1,0 +1,7 @@
+C:\Users\Panki\Desktop\PP2\Read_From_a_TextFile\Read_From_a_TextFile\bin\Debug\Read_From_a_TextFile.exe.config
+C:\Users\Panki\Desktop\PP2\Read_From_a_TextFile\Read_From_a_TextFile\bin\Debug\Read_From_a_TextFile.exe
+C:\Users\Panki\Desktop\PP2\Read_From_a_TextFile\Read_From_a_TextFile\bin\Debug\Read_From_a_TextFile.pdb
+C:\Users\Panki\Desktop\PP2\Read_From_a_TextFile\Read_From_a_TextFile\obj\Debug\Read_From_a_TextFile.csprojAssemblyReference.cache
+C:\Users\Panki\Desktop\PP2\Read_From_a_TextFile\Read_From_a_TextFile\obj\Debug\Read_From_a_TextFile.csproj.CoreCompileInputs.cache
+C:\Users\Panki\Desktop\PP2\Read_From_a_TextFile\Read_From_a_TextFile\obj\Debug\Read_From_a_TextFile.exe
+C:\Users\Panki\Desktop\PP2\Read_From_a_TextFile\Read_From_a_TextFile\obj\Debug\Read_From_a_TextFile.pdb
