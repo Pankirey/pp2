@@ -34,7 +34,7 @@ namespace Primenumber
                 }
             }
             Console.WriteLine(cnt);
-            for (int i = 0; i < cnt; i++)
+            for (int i = 0; i < cnt; i++)//asdasdasd
             {
                 Console.Write(a[i] + " ");
             }
