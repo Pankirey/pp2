@@ -9,9 +9,10 @@ namespace Filemanager
 {
     enum FSIMode
     {
-        DirectoryInfo =1,
-        File =2
+        DirectoryInfo = 1,
+        File = 2
     }
+
     class Layer
     {
         public FileSystemInfo[] Content
@@ -19,41 +20,58 @@ namespace Filemanager
             get;
             set;
         }
+        int selected;
         public int SelectedIndex
         {
-            get;
-            set;
+            get
+            {
+                return selected;
+            }
+            set
+            {
+                if (value < 0)
+                {
+                    selected = Content.Length - 1;
+                }
+                else if (value >= Content.Length)
+                {
+                    selected = 0;
+                }
+                else selected = value;
+            }
         }
+    
+
         public void Draw()
         {
             Console.BackgroundColor = ConsoleColor.Black;
             Console.Clear();
-            for (int i=0; i<Content.Length; i++)
+            for (int i = 0; i < Content.Length; ++i)
             {
-                if (i==SelectedIndex)
+
+                if (Content[i].GetType() == typeof(DirectoryInfo))
+                    Console.ForegroundColor = ConsoleColor.Green;
+                else
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                if (i == SelectedIndex)
                 {
-                    Console.BackgroundColor = ConsoleColor.Blue;    
+                    Console.BackgroundColor = ConsoleColor.Red;
+                   
                 }
                 else
                 {
                     Console.BackgroundColor = ConsoleColor.Black;
                 }
-                if (i >= SelectedIndex)
-                {
-                    SelectedIndex = 0;
-                }
-                else if (i < 0)
-                {
-                    SelectedIndex = Content.Length - 1;
-                }
-                else
-                {
-                    SelectedIndex = i;
-                }
                 Console.WriteLine(Content[i].Name);
             }
-        }   
+
+        }
+        
     }
+
+
+
+
     class Program
     {
         static void Main(string[] args)
@@ -66,12 +84,14 @@ namespace Filemanager
             };
 
             FSIMode curMode = FSIMode.DirectoryInfo;
+
             Stack<Layer> history = new Stack<Layer>();
             history.Push(l);
+
             bool esc = false;
             while (!esc)
             {
-                if (curMode == FSIMode.DirectoryInfo)
+                if (curMode ==FSIMode.DirectoryInfo)
                 {
                     history.Peek().Draw();
                 }
@@ -90,7 +110,7 @@ namespace Filemanager
                         if (fsi.GetType() == typeof(DirectoryInfo))
                         {
                             curMode = FSIMode.DirectoryInfo;
-                            // DirectoryInfo d = (DirectoryInfo)fsi;
+                        
                             DirectoryInfo d = fsi as DirectoryInfo;
                             history.Push(new Layer
                             {
@@ -105,8 +125,8 @@ namespace Filemanager
                             {
                                 using (StreamReader sr = new StreamReader(fs))
                                 {
-                                    Console.BackgroundColor = ConsoleColor.White;
-                                    Console.ForegroundColor = ConsoleColor.Black;
+                                    Console.BackgroundColor = ConsoleColor.Black;
+                                    Console.ForegroundColor = ConsoleColor.White;
                                     Console.Clear();
                                     Console.WriteLine(sr.ReadToEnd());
                                 }
@@ -127,9 +147,59 @@ namespace Filemanager
                     case ConsoleKey.Escape:
                         esc = true;
                         break;
+                    case ConsoleKey.D:
+                        int g = history.Peek().SelectedIndex;
+                        FileSystemInfo fg = history.Peek().Content[g];
+                        fg.Delete();
+                        history.Pop();
+                        int jk = history.Peek().SelectedIndex;
+                        FileSystemInfo nb = history.Peek().Content[jk];
+                        DirectoryInfo df = nb as DirectoryInfo;
+                        history.Push(new Layer
+                        { Content = df.GetFileSystemInfos(), SelectedIndex = 0
+                        });
+                        break;
+                    case ConsoleKey.R:
+                        int q = history.Peek().SelectedIndex;
+                        FileSystemInfo cv = history.Peek().Content[q];
+                        Console.Clear();
+                     
+                        Console.Write("Переименовать в: ");
+                        string name = Console.ReadLine();
+                        if (cv.GetType() ==typeof(DirectoryInfo))
+                        {
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.BackgroundColor = ConsoleColor.Black;
+                            Directory.Move(cv.FullName, Path.GetDirectoryName(cv.FullName) + "/" + name);
+
+                         
+                        }
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.DarkYellow;
+                            Console.BackgroundColor = ConsoleColor.Black;
+                            File.Copy(cv.FullName, Path.GetDirectoryName(cv.FullName) + "/" + name + ".txt");
+                            File.Delete(cv.FullName);
+                            history.Pop();
+                            int lk = history.Peek().SelectedIndex;
+                            FileSystemInfo uj = history.Peek().Content[lk];
+                            DirectoryInfo hn = uj as DirectoryInfo;
+                            history.Push(new Layer
+                            {
+                                Content = hn.GetFileSystemInfos(),
+                                SelectedIndex = 0
+                            });
+                        }
+
+
+                        break;
+                            
 
                 }
+                }
+                    
             }
+      
         }
     }
-}
+
