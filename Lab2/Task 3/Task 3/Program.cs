@@ -3,24 +3,44 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
-namespace Task_3
+namespace Task3
 {
-    class FileSysInfo
+    class Program
     {
+        static string Space(int a)
+        {
+            string s = "      ";
+            string q = "";
+            for (int i = 0; i < a; i++)
+            {
+                q += s;
+            }
+            return q;
+        }
+        static void qweqwe(DirectoryInfo dir, int a)
+        {
+            FileInfo[] files = dir.GetFiles();
+            DirectoryInfo[] dires = dir.GetDirectories();
+            foreach (FileInfo file in files)
+            {
+
+                Console.Write(Space(a));
+                Console.WriteLine(file.Name);
+            }
+            foreach (DirectoryInfo dire in dires)
+            {
+                Console.Write(Space(a));
+                Console.WriteLine(dire.Name);
+                qweqwe(dire, a + 1);
+            }
+        }
         static void Main(string[] args)
         {
-            System.IO.DriveInfo di = new System.IO.DriveInfo(@"C:\Users\Panki\Desktop\pp22");
-            System.IO.DirectoryInfo dirInfo = di.RootDirectory;
-            System.IO.FileInfo[] fileNames = dirInfo.GetFiles("*.*");
-
-            System.IO.DirectoryInfo[] dirInfos = dirInfo.GetDirectories("*.*");
-
-            foreach (System.IO.DirectoryInfo d in dirInfos)
-            {
-                Console.WriteLine(d.Name);
-            }
-
+            DirectoryInfo dir = new DirectoryInfo(@"C:\Users\Panki\Desktop\рабочий стол\ICT");
+            qweqwe(dir, 0);
+            Console.ReadKey();
         }
     }
 }
