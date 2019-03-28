@@ -106,6 +106,9 @@ namespace Filemanager
                         break;
                     case ConsoleKey.Enter:
                         int index = history.Peek().SelectedIndex;
+                        int a = history.Peek().Content.Length; 
+                        int b = history.Peek().Content.Length;
+                      
                         FileSystemInfo fsi = history.Peek().Content[index];
                         if (fsi.GetType() == typeof(DirectoryInfo))
                         {
@@ -147,18 +150,34 @@ namespace Filemanager
                     case ConsoleKey.Escape:
                         esc = true;
                         break;
-                    case ConsoleKey.D:
-                        int g = history.Peek().SelectedIndex;
-                        FileSystemInfo fg = history.Peek().Content[g];
-                        fg.Delete();
-                        history.Pop();
-                        int jk = history.Peek().SelectedIndex;
-                        FileSystemInfo nb = history.Peek().Content[jk];
-                        DirectoryInfo df = nb as DirectoryInfo;
-                        history.Push(new Layer
-                        { Content = df.GetFileSystemInfos(), SelectedIndex = 0
-                        });
-                        break;
+                   
+                     case ConsoleKey.D:
+                         int g = history.Peek().SelectedIndex;
+                         FileSystemInfo fg = history.Peek().Content[g];
+                         fg.Delete();
+
+                         if (history.Count == 0)
+                         {
+                             history.Peek();
+
+                             if (curMode == FSIMode.DirectoryInfo)
+                             {
+                                 history.Peek().Draw();
+                             }
+                         }
+                         else if (history.Count >0)
+                         {
+                             history.Pop();
+                             int jk = history.Peek().SelectedIndex;
+                             FileSystemInfo nb = history.Peek().Content[jk];
+                             DirectoryInfo df = nb as DirectoryInfo;
+                             history.Push(new Layer
+                             {
+                                 Content = df.GetFileSystemInfos(),
+                                 SelectedIndex = 0
+                             });
+                         }
+                         break;
                     case ConsoleKey.R:
                         int q = history.Peek().SelectedIndex;
                         FileSystemInfo cv = history.Peek().Content[q];
@@ -171,9 +190,8 @@ namespace Filemanager
                             Console.ForegroundColor = ConsoleColor.Green;
                             Console.BackgroundColor = ConsoleColor.Black;
                             Directory.Move(cv.FullName, Path.GetDirectoryName(cv.FullName) + "/" + name);
-
-                         
                         }
+
                         else
                         {
                             Console.ForegroundColor = ConsoleColor.DarkYellow;

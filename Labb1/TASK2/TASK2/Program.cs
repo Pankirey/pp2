@@ -37,7 +37,7 @@ namespace TASK2
         static void Main(string[] args)
         {
             Student s = new Student("Vasya", "18B123456");  //  создаем обьект класса Студент
-            s.YearofStudy = 1;  //  по умолчанию значение равно 1
+            s.YearofStudy = 3;  //  по умолчанию значение равно 1
             s.Increment();  //  после мметода значение инкрементируется (+1), то есть равно 2
             Console.WriteLine(s.YearofStudy);  //  Показываю, что метод Increment работает (Вывод: 2)
 

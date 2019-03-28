@@ -5,3 +5,10 @@ C:\Users\Panki\Desktop\PP2\Lab2\palindrome\palindrome\obj\Debug\palindrome.cspro
 C:\Users\Panki\Desktop\PP2\Lab2\palindrome\palindrome\obj\Debug\palindrome.csproj.CoreCompileInputs.cache
 C:\Users\Panki\Desktop\PP2\Lab2\palindrome\palindrome\obj\Debug\palindrome.exe
 C:\Users\Panki\Desktop\PP2\Lab2\palindrome\palindrome\obj\Debug\palindrome.pdb
+C:\Users\Panki\Desktop\pp22\Lab2\palindrome\palindrome\bin\Debug\palindrome.exe.config
+C:\Users\Panki\Desktop\pp22\Lab2\palindrome\palindrome\bin\Debug\palindrome.exe
+C:\Users\Panki\Desktop\pp22\Lab2\palindrome\palindrome\bin\Debug\palindrome.pdb
+C:\Users\Panki\Desktop\pp22\Lab2\palindrome\palindrome\obj\Debug\palindrome.csprojAssemblyReference.cache
+C:\Users\Panki\Desktop\pp22\Lab2\palindrome\palindrome\obj\Debug\palindrome.csproj.CoreCompileInputs.cache
+C:\Users\Panki\Desktop\pp22\Lab2\palindrome\palindrome\obj\Debug\palindrome.exe
+C:\Users\Panki\Desktop\pp22\Lab2\palindrome\palindrome\obj\Debug\palindrome.pdb
